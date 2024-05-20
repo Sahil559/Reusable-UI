@@ -3,7 +3,10 @@ from nicegui import ui
 from . import doc
 
 
-@doc.demo(ui.stepper)
+@doc.demo('Stepper', '''
+    You can remove the shadow from a card by adding the `no-shadow` class.
+    The following demo shows a 1 pixel wide border instead.
+''')
 def main_demo() -> None:
     with ui.stepper().props('vertical').classes('w-full') as stepper:
         with ui.step('Preheat'):

@@ -15,9 +15,9 @@ def create() -> None:
             .style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #5579C6; color: #ffffff;'):
         with ui.column().classes('gap-4 md:gap-8 pt-32').style('margin-left: 60px;') :
             ui.image(source="webapp/static/logo2.png").classes("w-20 h-20").style("margin-left: 180px;")
-            ui.html("<h1 class='text-6xl font-bold text-white text-left pl-8 pt-2 pr-8'>Welcome to the <br> Resuable U!</h1>")
-            ui.html("<p class='text-white text-left pl-9'>Crafts Seamless Experiences, Any Component Any Time.</p>") \
-                .classes('max-w-[20rem] sm:max-w-[24rem] md:max-w-[30rem]')
+            ui.html("<h1 class='text-6xl font-bold text-white text-left pl-8 pt-2 pr-8'>Crafts Seamlessly<br> with Resuable U!</h1>")
+            ui.html("<p class='text-white text-left pl-9'>Build Any Component Any Time.</p>") \
+                .classes('max-w-[10rem] sm:max-w-[24rem] md:max-w-[30rem]')
 
 
         with ui.column().classes("mt-[7%] ml-[35%]") as col2:
@@ -152,7 +152,8 @@ def create() -> None:
 
 
 
-    with ui.row().classes('w-full').style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1C768F; color: #ffffff;'):
+    with ui.row().classes('w-full p-8 lg:p-16 bold-links arrow-links max-w-[1600px] mx-auto')\
+            .style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1768AC; color: #ffffff;'):
         link_target('why')
         with ui.column().classes('''
                 max-w-[1600px] m-auto

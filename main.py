@@ -10,8 +10,8 @@ from starlette.middleware.sessions import SessionMiddleware
 from nicegui import app, ui
 from webapp import  main_page, documentation
 
-
 app.add_middleware(SessionMiddleware, secret_key=os.environ.get('NICEGUI_SECRET_KEY', ''))
+
 
 
 @ui.page('/')
@@ -32,7 +32,5 @@ def _documentation_detail_page(name: str) -> Optional[RedirectResponse]:
     if name in documentation.redirects:
         return RedirectResponse(documentation.redirects[name])
     raise HTTPException(404, f'documentation for "{name}" could not be found')
-
-
 
 ui.run(title="Reusable U!")
