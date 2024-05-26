@@ -3,12 +3,8 @@ from nicegui import ui
 from . import doc
 
 
-@doc.demo(ui.upload)
-def main_demo() -> None:
-    ui.upload(on_upload=lambda e: ui.notify(f'Uploaded {e.name}')).classes('max-w-full')
 
-
-@doc.demo('Upload restrictions', '''
+@doc.demo('Upload File', '''
     In this demo, the upload is restricted to a maximum file size of 1 MB.
     When a file is rejected, a notification is shown.
 ''')

@@ -27,15 +27,15 @@ def add_head_html() -> None:
     """Add the code from header.html and reference style.css."""
     ui.add_head_html(HEADER_HTML + f'<style>{STYLE_CSS}</style>')
 
-# def start_auth_server():
-#     """Start the authentication server by running main2.py."""
-#     subprocess.Popen(['python', 'main2.py'])
+def start_auth_server():
+    """Start the authentication server by running main2.py."""
+    subprocess.Popen(['python', 'main2.py'])
 
-# @app.get("/login")
-# def login():
-#     """Endpoint to start the authentication server."""
-#     start_auth_server()
-#     return HTMLResponse(content="<html><body><h1>Authentication Server Started</h1></body></html>")
+@app.get("/login")
+def login():
+    """Endpoint to start the authentication server."""
+    start_auth_server()
+    return HTMLResponse(content="<html><body><h1>Authentication Server Started</h1></body></html>")
 
 
 
@@ -68,10 +68,10 @@ def add_header(menu: Optional[ui.left_drawer] = None) -> None:
                         for sub_title, sub_target in target.items():
                             ui.menu_item(sub_title, on_click=lambda sub_target=sub_target: ui.navigate.to(sub_target))
                
-                # else:
-                #     if title_ == "Login":
-                #         ui.link(title_, on_click=lambda: ui.run_javascript("fetch('/login')")).classes(replace='text-lg text-white')
                 else:
+                    if title_ == "Login":
+                        ui.button(title_, on_click=lambda: ui.run_javascript("fetch('/login')")).classes(replace='text-lg text-white')
+                    else:
                         ui.link(title_, target).classes(replace='text-lg text-white')
 
 

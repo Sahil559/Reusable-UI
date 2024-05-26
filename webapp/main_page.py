@@ -36,9 +36,7 @@ def create() -> None:
                                 with ui.card_section().classes(""):
                                     ui.button(
                                         "Try now",
-                                        on_click=lambda e: ui.navigate.to(
-                                            "http://p2203403.pages.univ-lyon1.fr/sae-webs1/",
-                                            new_tab=True,
+                                        on_click=lambda e: ui.navigate.to('/documentation/section_page_layout'
                                         ),
                                     ).classes(
                                         "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
@@ -57,8 +55,7 @@ def create() -> None:
                                     ui.button(
                                         "Try now",
                                         on_click=lambda e: ui.navigate.to(
-                                            "https://ffillouxdev.github.io/logicompta-website/",
-                                            new_tab=True,
+                                            '/documentation/section_navigations'
                                         ),
                                     ).classes(
                                         "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
@@ -78,8 +75,7 @@ def create() -> None:
                                     ui.button(
                                         "Try now",
                                         on_click=lambda e: ui.navigate.to(
-                                            "https://github.com/ffillouxdev/GESTIONAIR",
-                                            new_tab=True,
+                                            '/documentation/section_input_area'
                                         ),
                                     ).classes(
                                         "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
@@ -98,9 +94,7 @@ def create() -> None:
                                     ui.button(
                                         "Try now",
                                         on_click=lambda e: ui.navigate.to(
-                                            "https://github.com/ffillouxdev/NiceGui_project",
-                                            new_tab=True,
-                                        ),
+                                           '/documentation/section_element'),
                                     ).classes(
                                         "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                     )  

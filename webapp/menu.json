@@ -6,7 +6,6 @@
   "items": {
     "Features": "/#features",
     "Demos": "/#demos",
-    "About": "/#why",
-    "Login" : "/login"
+    "About": "/#why"
   }
 }
