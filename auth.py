@@ -13,9 +13,9 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from nicegui import Client, app, ui
 
 # in reality users passwords would obviously need to be hashed
-passwords = {'user1': 'pass1', 'user2': 'pass2'}
+passwords = {'user': 'password'}
 
-unrestricted_page_routes = {'/login'}
+unrestricted_page_routes = {'/login', '/signup'}
 
 
 class AuthMiddleware(BaseHTTPMiddleware):
@@ -54,9 +54,6 @@ def _documentation_detail_page(name: str) -> Optional[RedirectResponse]:
         return RedirectResponse(documentation.redirects[name])
     raise HTTPException(404, f'documentation for "{name}" could not be found')    
 
-@ui.page('/subpage')
-def test_page() -> None:
-    ui.label('This is a sub page.')
 
 
 @ui.page('/login')
@@ -69,12 +66,49 @@ def login() -> Optional[RedirectResponse]:
             ui.notify('Wrong username or password', color='negative')
 
     if app.storage.user.get('authenticated', False):
-        return RedirectResponse('/')
-    with ui.card().classes('absolute-center'):
-        username = ui.input('Username').on('keydown.enter', try_login)
-        password = ui.input('Password', password=True, password_toggle_button=True).on('keydown.enter', try_login)
-        ui.button('Log in', on_click=try_login)
-    return None
+        return RedirectResponse('/login')
+    
+    login_page = ui.query("body").style("background: linear-gradient(to left, #0066ff, #00ccff);")
+    with ui.card().classes('absolute-center shadow-lg rounded-lg').style('padding: 10px; width: 900px; background-color: lightblue; '):
+       with ui.grid(columns=2):
+        with ui.column().classes("w-3/3 p-4").style('margin-left: 40px;'):
+            ui.label('Login').style('font-size: 44px; margin-bottom: 2px; margin-top: 20px; font-weight: bold; color: #333;')
+            username = ui.input('Email Address').style('margin-bottom: 5px; padding: 10px; border-radius: 5px; border: 1px solid #ccc;')
+            password = ui.input('Password', password=True, password_toggle_button=True).style('margin-bottom: 10px; padding: 10px; border-radius: 5px; border: 1px solid #ccc;')
+            ui.button('Log in', on_click=try_login).style('width: 100%; margin-bottom: 10px; background-color: #007BFF; color: white; padding: 10px; border-radius: 5px; font-size: 18px;')
+            ui.link('Forgot Password?', '/reset_password').style('display: block; text-align: center; margin-ottom: 10px; color: #007BFF; text-decoration: none;')
+            ui.button('Log in with Facebook').props('icon=facebook').style('background-color: #3b5998; color: white; padding: 10px; border-radius: 5px;')
+            with ui.row().classes('center').style('margin-top: 20px;'):
+                ui.link('Sign Up', '/signup').style('margin-right: 10px; color: #007BFF; text-decoration: none;')
+                ui.link('Skip for Now', '/').style('color: #007BFF; text-decoration: none;')
+        with ui.column().style('margin-top: 20px; margin-bottom: 40px;margin-left: 40px '):
+            ui.image(source="webapp/static/about.png").style('width: 190%; height:100%;')
+    return login_page
 
 
-ui.run(storage_secret='THIS_NEEDS_TO_BE_CHANGED')
+@ui.page('/signup')
+def signup() -> None:
+    def try_signup() -> None:
+        if new_password.value == confirm_password.value:
+            passwords[new_username.value] = new_password.value
+            app.storage.user.update({'username': new_username.value, 'authenticated': True})
+            ui.navigate.to('/')
+        else:
+            ui.notify('Passwords do not match', color='negative')
+
+    signup_page = ui.query("body").style("background: linear-gradient(to right, #0066ff, #00ccff);")
+    with ui.card().classes('absolute-center shadow-lg rounded-lg').style('padding: 20px; width: 900px; background-color: lightblue'):
+        with ui.grid(columns=2):
+            with ui.column().classes("w-3/3 p-4").style('margin-left: 40px;'):
+                ui.label('Sign Up').style('font-size: 44px; margin-bottom: 5px; margin-top: 20px; font-weight: bold; color: #333;')
+                new_username = ui.input('Email Address').style('margin-bottom: 5px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 100%;')
+                new_password = ui.input('Password', password=True, password_toggle_button=True).style('margin-bottom: 5px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 100%;')
+                confirm_password = ui.input('Confirm Password', password=True, password_toggle_button=True).style('margin-bottom: 5px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 100%;')
+                ui.button('Sign Up', on_click=try_signup).style('width: 100%; margin-bottom: 10px; background-color: #007BFF; color: white; padding: 10px; border-radius: 5px; font-size: 18px;')
+                ui.link('Back to Login', '/login').style('display: block; text-align: center; margin-bottom: 10px; color: #007BFF; text-decoration: none;')
+            with ui.column().style('margin-top: 20px; margin-bottom: 40px;margin-left: 40px '):
+                ui.image(source="webapp/static/about.png").style('width: 190%; height:100%;')
+    return signup_page
+
+
+ui.run(storage_secret='THIS_NEEDS_TO_BE_CHANGED', title="Reusable U!")
