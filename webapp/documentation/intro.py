@@ -7,7 +7,7 @@ from .demo import demo
 
 
 def create_intro() -> None:
-    @_main_page_demo('About Page', '''
+    @_main_page_demo('Page Section', '''
     You can also add a radio.
 ''')
     def content():

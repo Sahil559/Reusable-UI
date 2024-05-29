@@ -3,7 +3,7 @@ from nicegui import ui
 from .header import add_head_html, add_header
 from .style import features, heading, link_target, section_heading
 from . import documentation
-
+from webapp.footer import add_footer
 
 def create() -> None:
     """Create the content of the main page."""
@@ -13,15 +13,17 @@ def create() -> None:
 
     with ui.row().classes("w-full h-[110vh]")\
             .style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #5579C6; color: #ffffff;'):
+        
+     with ui.grid(columns=2).classes():
         with ui.column().classes('gap-4 md:gap-8 pt-32').style('margin-left: 60px;') :
-            ui.image(source="webapp/static/logo2.png").classes("w-20 h-20").style("margin-left: 180px;")
+            ui.image(source="webapp/static/logo2.png").style("width: 40%; height:100%; margin-left: 160px;")
             ui.html("<h1 class='text-6xl font-bold text-white text-left pl-8 pt-2 pr-8'>Crafts Seamlessly<br> with Resuable U!</h1>")
             ui.html("<p class='text-white text-left pl-9'>Build Any Component Any Time.</p>") \
                 .classes('max-w-[10rem] sm:max-w-[24rem] md:max-w-[30rem]')
 
 
         with ui.column().classes("mt-[7%] ml-[35%]") as col2:
-                with ui.grid(columns=2).classes():
+                with ui.grid(columns=2).classes().style("margin-left:40px; margin-top:40px"):
                     with ui.column().classes("card-container1") as col_2_1:
                         with ui.row().classes("flex flex-col"):
                             with ui.card().tight().classes(
@@ -167,5 +169,4 @@ def create() -> None:
                                 Experience the power of reusability with Resuable UI, and unlock a new era of web development possibilities.
                     ''')
 
-
-                   
+    add_footer()

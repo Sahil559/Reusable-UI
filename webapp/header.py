@@ -53,9 +53,8 @@ def add_header(menu: Optional[ui.left_drawer] = None) -> None:
             .style(header_properties.get('style', '')):
         
         ui.button(on_click=lambda: left_drawer.toggle(), icon='menu').props('flat color=white')
-        
-        with ui.left_drawer().classes('bg-blue-100').style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1260CC;') as left_drawer:
-         ui.label('Side menu')   
+        with ui.left_drawer(elevated=True, value=False).classes('bg-blue-100').style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1260CC;') as left_drawer:
+         ui.label('')   
         if menu:
             ui.button(on_click=menu.toggle, icon='menu').props('flat color=white round').classes('lg:hidden')
         with ui.link(target='/').classes('row gap-4 items-center no-wrap mr-auto'):
