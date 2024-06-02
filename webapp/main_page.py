@@ -1,35 +1,55 @@
-from nicegui import ui
+from nicegui import ui,app
 
 from .header import add_head_html, add_header
 from .style import features, heading, link_target, section_heading
 from . import documentation
 from webapp.footer import add_footer
+from animationJs import slide_left, slide_right, all_gsap, class_list
+
 
 def create() -> None:
     """Create the content of the main page."""
     ui.context.client.content.classes('p-0 gap-0')
+
     add_head_html()
     add_header()
+            
+    slide_left(".animate_slideInLeft")
+    slide_right(".animate_slideInRight")
+    all_gsap()
+    with ui.row().classes("w-full h-[100vh]")\
+    .style('background: linear-gradient(to right, #3D52A0, #244855, #2C2E3A, #244855 ); color: #ffffff;'):
+      with ui.grid().style("display: grid; grid-template-columns: 2fr 1fr; width: 100%;"):
+        with ui.column().classes(' gap-4 md:gap-8 pt-32').style('margin-left:50px;margin-top:5px') :
+            with ui.row().style("display: flex; justify-content: center; width: 100%; margin-bottom: -20px;"):
+              ui.image(source="webapp/static/logo2.png").style("width: 15%; height:100%; ")
+            with ui.row().style("display: flex; justify-content: center; width: 100%; margin-bottom: -20px;"):  
+              ui.html("<h1 class='text-6xl font-bold text-white text-left  pl-8 pt-2 pr-8' style='letter-spacing: 0.025em'>Crafts Seamless Experience<br><center> with Resuable U!</center></h1>")
+            with ui.row().style("display: flex; justify-content: center; width: 100%;"):  
+              ui.html("<h2 class='text-2xl text-white text-left pl-8 pt-2 pr-8'>Build beautiful UIs effortlessly with our intuitive GUI components.</h2>")
+            with ui.row().style("display: flex; justify-content: center; width: 100%;  margin-top: -10px;"):  
+              ui.html("<h2 class='text-2xl text-white text-left pl-2 pt-2 pr-0'>Jump right into building</h2>")
+              ui.button("Read Docs",icon='book' ,on_click=lambda e: ui.navigate.to(
+                                           '/documentation'),
+                                    ).classes(
+                                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 "
+                                    ).style(
+                    "font-size: 18px; padding: 10px 20px margin-left: 40px;"
+                )
+            with ui.row().classes('gap-2 bold-links arrow-links text-lg').style("display: flex; justify-content: center; width: 100%;  margin-top: -10px;"):  
+              ui.markdown('''
+                    #####Available on [GitHub](https://github.com/Sahil559/Reusable-UI)
+                ''')
+              
 
-    with ui.row().classes("w-full h-[110vh]")\
-            .style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #5579C6; color: #ffffff;'):
-        
-     with ui.grid(columns=2).classes():
-        with ui.column().classes('gap-4 md:gap-8 pt-32').style('margin-left: 60px;') :
-            ui.image(source="webapp/static/logo2.png").style("width: 40%; height:100%; margin-left: 160px;")
-            ui.html("<h1 class='text-6xl font-bold text-white text-left pl-8 pt-2 pr-8'>Crafts Seamlessly<br> with Resuable U!</h1>")
-            ui.html("<p class='text-white text-left pl-9'>Build Any Component Any Time.</p>") \
-                .classes('max-w-[10rem] sm:max-w-[24rem] md:max-w-[30rem]')
-
-
-        with ui.column().classes("mt-[7%] ml-[35%]") as col2:
-                with ui.grid(columns=2).classes().style("margin-left:40px; margin-top:40px"):
+        with ui.column().classes("mt-[7%] ml-[15%]") as col2:
+                with ui.grid(columns=2).classes().style(" margin-top:40px"):
                     with ui.column().classes("card-container1") as col_2_1:
                         with ui.row().classes("flex flex-col"):
                             with ui.card().tight().classes(
                                 "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
                             )\
-                            .style('background-color: #1260CC; color: #ffffff;') as card1:
+                            .style('background-color: #3D52A0; color: #ffffff;') as card1:
                                 ui.image(source="webapp/static/PG.png").classes("w-1/2")
                                 with ui.card_section():
                                     ui.label("Page Section").classes(
@@ -44,16 +64,16 @@ def create() -> None:
                                         "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
                                     )
 
-                            with ui.card().tight().classes(
+                            with ui.card().classes(
                                 "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
                             )\
-                            .style('background-color: #1260CC; color: #ffffff;') as card2:
-                                ui.image(source="webapp/static/ns.png").classes("w-1/2")
+                            .style('background-color: #3D52A0; color: #ffffff;') as card2:
+                                ui.image(source="webapp/static/ns.png").classes("w-2/3")
                                 with ui.card_section():
                                     ui.label("Navigation").classes(
                                         "text-lg font-semibold text-center"
                                     )
-                                with ui.card_section().classes(""):
+                                with ui.card_section().classes("").style('margin-top: -30px'):
                                     ui.button(
                                         "Try now",
                                         on_click=lambda e: ui.navigate.to(
@@ -67,7 +87,7 @@ def create() -> None:
                             with ui.card().tight().classes(
                                 "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
                             )\
-                            .style('background-color: #1260CC; color: #ffffff;') as card3:
+                            .style('background-color: #3D52A0; color: #ffffff;') as card3:
                                 ui.image(source="webapp/static/ia.png").classes("w-1/2")
                                 with ui.card_section():
                                     ui.label("Input Area").classes(
@@ -86,7 +106,7 @@ def create() -> None:
                             with ui.card().tight().classes(
                                 "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
                             )\
-                            .style('background-color: #1260CC; color: #ffffff;') as card4:
+                            .style('background-color: #3D52A0; color: #ffffff;') as card4:
                                 ui.image(source="webapp/static/es.jpg").classes("w-1/2")
                                 with ui.card_section():
                                     ui.label("Elements").classes(
@@ -98,7 +118,7 @@ def create() -> None:
                                         on_click=lambda e: ui.navigate.to(
                                            '/documentation/section_element'),
                                     ).classes(
-                                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 "
                                     )  
 
 

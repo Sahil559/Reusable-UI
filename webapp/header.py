@@ -2,11 +2,8 @@ from pathlib import Path
 from typing import Optional
 
 from nicegui import app, ui
-from .search import Search
+from webapp.search import Search
 import json
-
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
 import subprocess
 
 
@@ -30,13 +27,6 @@ def start_auth_server():
     """Start the authentication server by running main2.py."""
     subprocess.Popen(['python', 'main2.py'])
 
-@app.get("/login")
-def login():
-    """Endpoint to start the authentication server."""
-    start_auth_server()
-    return HTMLResponse(content="<html><body><h1>Authentication Server Started</h1></body></html>")
-
-
 
 def add_header(menu: Optional[ui.left_drawer] = None) -> None:
     """Create the page header."""
@@ -52,18 +42,26 @@ def add_header(menu: Optional[ui.left_drawer] = None) -> None:
             .classes(header_properties.get('classes', '')) \
             .style(header_properties.get('style', '')):
         
-        ui.button(on_click=lambda: left_drawer.toggle(), icon='menu').props('flat color=white')
-        with ui.left_drawer(elevated=True, value=False).classes('bg-blue-100').style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1260CC;') as left_drawer:
-         ui.label('')   
+        # ui.button(on_click=lambda: left_drawer.toggle(), icon='menu').props('flat color=white')
+        # with ui.left_drawer(elevated=True, value=False).classes('bg-blue-100').style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1260CC;') as left_drawer:
+        #  ui.label('')  
+
         if menu:
             ui.button(on_click=menu.toggle, icon='menu').props('flat color=white round').classes('lg:hidden')
         with ui.link(target='/').classes('row gap-4 items-center no-wrap mr-auto'):
             logo = ui.image(source="webapp/static/logo2.png").classes("w-10 h-10")
             ui.label('Resuable U!').classes(replace='text-lg text-white')
 
-        with ui.row().classes('max-[1050px]:hidden'):
+        with ui.dropdown_button('Documentation', auto_close=True).props('flat round color=white').classes(header_properties.get('classes', 'text-lg text-white')):
+              ui.item('Elements', on_click=lambda: ui.navigate.to('/documentation/section_element')).classes('text-white bg-blue-900 hover:bg-blue-500')
+              ui.item('Page Layout', on_click=lambda: ui.navigate.to('/documentation/section_page_layout')).classes('text-white bg-blue-900 hover:bg-blue-500')
+              ui.item('Navigations', on_click=lambda: ui.navigate.to('/documentation/section_navigations')).classes('text-white bg-blue-900 hover:bg-blue-500')
+              ui.item('Input Area', on_click=lambda: ui.navigate.to('/documentation/section_input_area')).classes('text-white bg-blue-900 hover:bg-blue-500')
+    
+
+        with ui.row().classes('max-[1050px]:hidden  flex items-center'):
             for title_, target in menu_items.items():
-                if isinstance(target, dict):  # Check if the item is a dictionary (dropdown)
+                if isinstance(target, dict): 
                     with ui.menu().classes('text-lg text-white'):
                         ui.button(title_).props('flat color=white round')
                         for sub_title, sub_target in target.items():
@@ -71,25 +69,13 @@ def add_header(menu: Optional[ui.left_drawer] = None) -> None:
                
                 else:
                     if title_ == "Login":
-                        ui.button(title_, on_click=lambda: ui.run_javascript("fetch('/login')")).classes(replace='text-lg text-white')
+                        with ui.button(on_click=lambda e: ui.navigate.to('/login')).props('flat color=white round').classes('flex items-center'):
+                         ui.icon('login').style('margin-right: 8px;')
+                         ui.html('<span>Login</span>')
                     else:
                         ui.link(title_, target).classes(replace='text-lg text-white')
 
 
-            with ui.dropdown_button('Documentation', auto_close=True, color=None).classes(header_properties.get('classes', '')):
-                ui.item('Elements', on_click=lambda: ui.navigate.to('/documentation/section_element'))
-                ui.item('Page Layout', on_click=lambda: ui.navigate.to('/documentation/section_page_layout'))
-                ui.item('Navigations', on_click=lambda: ui.navigate.to('/documentation/section_navigations'))
-                ui.item('Input Area', on_click=lambda: ui.navigate.to('/documentation/section_input_area'))
-        
-
         search = Search()
         search.create_button()
         
-                    #  # Add documentation dropdown items
-                    # documentation_menu = menu_items.get("Documentation", {})
-                    # with ui.menu():
-                    #     for doc_title, doc_target in documentation_menu.items():
-                    #         ui.menu_item(doc_title, on_click=lambda doc_target=doc_target: ui.navigate.to(doc_target))
-
-                  

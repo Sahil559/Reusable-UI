@@ -19,7 +19,6 @@ def add_footer()-> None:
         ui.link("Examples", "#")
         ui.link("Themes", "#")
         ui.link("Blog", "#")
-        ui.link("Swag Store", "#")
     
      with ui.column().classes("flex flex-col  px-16 space-y-2"):
         ui.label("Guides").classes("font-bold text-lg mb-2")

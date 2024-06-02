@@ -13,7 +13,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from nicegui import Client, app, ui
 
 # in reality users passwords would obviously need to be hashed
-passwords = {'user': 'password'}
+passwords = {'user@gmail.com': 'password'}
 
 unrestricted_page_routes = {'/login', '/signup'}
 
@@ -32,8 +32,10 @@ class AuthMiddleware(BaseHTTPMiddleware):
         return await call_next(request)
 
 
-app.add_middleware(AuthMiddleware)
+# app.add_middleware(AuthMiddleware)
+app.add_middleware(SessionMiddleware, secret_key=os.environ.get('NICEGUI_SECRET_KEY', ''))
 
+documentation.build_search_index()
 
 @ui.page('/')
 def _main_page() -> None:
@@ -111,4 +113,4 @@ def signup() -> None:
     return signup_page
 
 
-ui.run(storage_secret='THIS_NEEDS_TO_BE_CHANGED', title="Reusable U!")
+ui.run( title="Reusable U!")

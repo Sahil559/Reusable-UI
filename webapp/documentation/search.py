@@ -7,7 +7,7 @@ from nicegui import app
 
 from .content import registry
 
-PATH = Path(__file__).parent.parent / 'static' / 'search_index.json'
+PATH = Path(__file__).parent / 'static' / 'search_index.json'
 search_index: List[Dict[str, str]] = []
 
 
