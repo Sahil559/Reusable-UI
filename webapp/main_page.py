@@ -4,25 +4,50 @@ from .header import add_head_html, add_header
 from .style import features, heading, link_target, section_heading
 from . import documentation
 from webapp.footer import add_footer
-from animationJs import slide_left, slide_right, all_gsap, class_list
 
 
 def create() -> None:
     """Create the content of the main page."""
     ui.context.client.content.classes('p-0 gap-0')
+    STYLE='''
+    
+        .card-container1 .card-plus,
+        .card-container2 .card-plus {
+            transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            border-radius: 12px;
+        }
 
+        .card-container1 .card-plus:hover,
+        .card-container2 .card-plus:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #2C3E50; /* Slightly darker background color on hover */
+        }
+        .logo-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            background-color: #ffffff;
+        }
+        .logo-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    '''
+    ui.add_css(STYLE)
     add_head_html()
     add_header()
-            
-    slide_left(".animate_slideInLeft")
-    slide_right(".animate_slideInRight")
-    all_gsap()
+    
     with ui.row().classes("w-full h-[100vh]")\
     .style('background: linear-gradient(to right, #3D52A0, #244855, #2C2E3A, #244855 ); color: #ffffff;'):
       with ui.grid().style("display: grid; grid-template-columns: 2fr 1fr; width: 100%;"):
         with ui.column().classes(' gap-4 md:gap-8 pt-32').style('margin-left:50px;margin-top:5px') :
             with ui.row().style("display: flex; justify-content: center; width: 100%; margin-bottom: -20px;"):
-              ui.image(source="webapp/static/logo2.png").style("width: 15%; height:100%; ")
+                    with ui.card().classes('logo-card').style("width: 15%; height: auto;"):
+                        ui.image(source="webapp/static/logo2.png").style("width: 100%; height: auto;")
             with ui.row().style("display: flex; justify-content: center; width: 100%; margin-bottom: -20px;"):  
               ui.html("<h1 class='text-6xl font-bold text-white text-left  pl-8 pt-2 pr-8' style='letter-spacing: 0.025em'>Crafts Seamless Experience<br><center> with Resuable U!</center></h1>")
             with ui.row().style("display: flex; justify-content: center; width: 100%;"):  
