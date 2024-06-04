@@ -8,12 +8,13 @@ from . import (
     carousel_documentation,
     stepper_documentation,
     tech_stack_documentation,
-    about_documentation
+    about_documentation,
+    grid_documenation
 )
 
 doc.title('Page Section')
 
-
+doc.intro(grid_documenation)
 doc.intro(about_documentation)
 doc.intro(contact_documentation)
 doc.intro(tech_stack_documentation)
