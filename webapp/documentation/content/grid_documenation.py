@@ -7,120 +7,58 @@ from . import doc
 ''')
 def content():
   ui.context.client.content.classes('p-0 gap-0')
-  with ui.row().classes("w-full h-[100vh]")\
-        .style('background: linear-gradient(to right, #244855, #2C2E3A);'):
+  with ui.row().classes("w-full h-full").style('background: linear-gradient(to right, #244855, #2C2E3A);'):
 
-    with ui.grid(columns=4).classes().style("margin-left:80px; margin-top:80px;"):
+    recipes = [
+        {
+            "image": "https://source.unsplash.com/random/200x200?pizza",
+            "title": "Pizza",
+            "description": "A delicious homemade pizza recipe with a crispy crust and customizable toppings.",
+            "button_text": "View Recipe",
+            "link": "/recipe/pizza"
+        },
+        {
+            "image": "https://source.unsplash.com/random/200x200?pasta",
+            "title": "Pasta",
+            "description": "An easy pasta recipe with a savory sauce and fresh herbs. Perfect for a quick dinner.",
+            "button_text": "View Recipe",
+            "link": "/recipe/pasta"
+        },
+        {
+            "image": "https://source.unsplash.com/random/200x200?salad",
+            "title": "Salad",
+            "description": "A classic Caesar salad with fresh lettuce, homemade dressing, and crunchy croutons.",
+            "button_text": "View Recipe",
+            "link": "/recipe/salad"
+        },
+        {
+            "image": "https://source.unsplash.com/random/200x200?burger",
+            "title": "Burger",
+            "description": "A juicy burger recipe with all the classic toppings, perfect for a summer BBQ.",
+            "button_text": "View Recipe",
+            "link": "/recipe/burger"
+        },
+        {
+            "image": "https://source.unsplash.com/random/200x200?cake",
+            "title": "Chocolate Cake",
+            "description": "A rich and moist chocolate cake recipe that is sure to satisfy your sweet tooth.",
+            "button_text": "View Recipe",
+            "link": "/recipe/cake"
+        },
+        {
+            "image": "https://source.unsplash.com/random/200x200?icecream",
+            "title": "Ice Cream",
+            "description": "A creamy and delicious homemade ice cream recipe with your choice of flavors.",
+            "button_text": "View Recipe",
+            "link": "/recipe/icecream"
+        }
+    ]
 
-        with ui.column().classes("card-container1").style("margin-right:80px") as col_1:
-          with ui.row().classes("flex flex-col"):  
-            with ui.card().tight().classes(
-                    "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
-            )\
-                    .style('background-color: #3D52A0; color: #ffffff;') as card1:
-                ui.image(source="https://source.unsplash.com/random/200x200?pizza").classes("w-1/2")
+    with ui.grid(columns=3).classes().style("margin: 40px; gap: 20px;"):
+        for recipe in recipes:
+            with ui.card().tight().classes("border rounded-lg shadow-md card-plus").style('background-color: #fff; color: #000;'):
+                ui.image(source=recipe["image"]).classes("w-full h-[150px] object-cover")
                 with ui.card_section():
-                    ui.label("Pizza").classes(
-                        "text-lg font-semibold text-center w-[120px]"
-                    )
-                with ui.card_section().classes(""):
-                    ui.button(
-                        "View Recipe",
-                        on_click=lambda e: ui.navigate.to('/recipe/pizza'),
-
-                    ).classes(
-                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
-                    )
-
-            with ui.card().tight().classes(
-                    "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
-            )\
-                    .style('background-color: #3D52A0; color: #ffffff;') as card1:
-                ui.image(source="https://source.unsplash.com/random/200x200?pizza").classes("w-1/2")
-                with ui.card_section():
-                    ui.label("Pizza").classes(
-                        "text-lg font-semibold text-center w-[120px]"
-                    )
-                with ui.card_section().classes(""):
-                    ui.button(
-                        "View Recipe",
-                        on_click=lambda e: ui.navigate.to('/recipe/pizza'),
-
-                    ).classes(
-                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
-                    )
-
-        with ui.column().classes("card-container1").style("margin-right:80px") as col_1:
-          with ui.row().classes("flex flex-col"):  
-            with ui.card().tight().classes(
-                    "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
-            )\
-                    .style('background-color: #3D52A0; color: #ffffff;') as card1:
-                ui.image(source="https://source.unsplash.com/random/200x200?pizza").classes("w-1/2")
-                with ui.card_section():
-                    ui.label("Pizza").classes(
-                        "text-lg font-semibold text-center w-[120px]"
-                    )
-                with ui.card_section().classes(""):
-                    ui.button(
-                        "View Recipe",
-                        on_click=lambda e: ui.navigate.to('/recipe/pizza'),
-
-                    ).classes(
-                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
-                    )
-
-            with ui.card().tight().classes(
-                    "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
-            )\
-                    .style('background-color: #3D52A0; color: #ffffff;') as card1:
-                ui.image(source="https://source.unsplash.com/random/200x200?pizza").classes("w-1/2")
-                with ui.card_section():
-                    ui.label("Pizza").classes(
-                        "text-lg font-semibold text-center w-[120px]"
-                    )
-                with ui.card_section().classes(""):
-                    ui.button(
-                        "View Recipe",
-                        on_click=lambda e: ui.navigate.to('/recipe/pizza'),
-
-                    ).classes(
-                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
-                    )
-
-        with ui.column().classes("card-container3") as col_3:
-          with ui.row().classes("flex flex-col"):  
-            with ui.card().tight().classes(
-                    "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
-            )\
-                    .style('background-color: #3D52A0; color: #ffffff;') as card3:
-                ui.image(source="https://source.unsplash.com/random/200x200?pasta").classes("w-1/2")
-                with ui.card_section():
-                    ui.label("Pasta").classes(
-                        "text-lg font-semibold w-[120px] text-center"
-                    )
-                with ui.card_section().classes(""):
-                    ui.button(
-                        "View Recipe",
-                        on_click=lambda e: ui.navigate.to('/recipe/pasta'),
-                    ).classes(
-                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
-                    )
-
-            with ui.card().tight().classes(
-                    "border rounded-lg shadow-md card-plus flex flex-col justify-center items-center pt-6"
-            )\
-                    .style('background-color: #3D52A0; color: #ffffff;') as card1:
-                ui.image(source="https://source.unsplash.com/random/200x200?pizza").classes("w-1/2")
-                with ui.card_section():
-                    ui.label("Pizza").classes(
-                        "text-lg font-semibold text-center w-[120px]"
-                    )
-                with ui.card_section().classes(""):
-                    ui.button(
-                        "View Recipe",
-                        on_click=lambda e: ui.navigate.to('/recipe/pizza'),
-
-                    ).classes(
-                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4"
-                    )
+                    ui.label(recipe["title"]).classes("text-lg font-semibold text-center")
+                    ui.label(recipe["description"]).classes("text-sm text-center")
+                    ui.button(recipe["button_text"], on_click=lambda e, link=recipe["link"]: ui.navigate.to(link)).classes("bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-4 mt-4")

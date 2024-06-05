@@ -39,4 +39,3 @@ def expansion_with_grouping():
         ui.label('inside expansion three')
 
 
-doc.reference(ui.expansion)

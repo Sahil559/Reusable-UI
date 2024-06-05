@@ -9,7 +9,6 @@ from . import (
     badge_documentation,
     slider_documentation
 )
-from webapp.footer import add_footer
 
 doc.title('Elements')
 
@@ -21,5 +20,3 @@ doc.intro(avatar_documentation)
 doc.intro(toggle_documentation)
 doc.intro(badge_documentation)
 doc.intro(slider_documentation)
-
-add_footer()

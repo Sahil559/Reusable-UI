@@ -8,41 +8,11 @@ from authlib.integrations.starlette_client import OAuth, OAuthError
 from webapp.auth.config import CLIENT_ID, CLIENT_SECRET
 from fastapi.staticfiles import StaticFiles
 from nicegui import app, ui
-from typing import Optional
-from webapp import  main_page, documentation
-import os
 
-
-app.add_middleware(SessionMiddleware, secret_key=os.environ.get('NICEGUI_SECRET_KEY', ''))
 
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key="add any string...")
 app.mount("/static", StaticFiles(directory="webapp/auth/static"), name="static")
-
-
-
-
-@ui.page('/')
-def _main_page() -> None:
-    main_page.create()
-
-
-@ui.page('/documentation')
-def _documentation_page() -> None:
-    documentation.render_page(documentation.registry[''], with_menu=False)
-
-
-@ui.page('/documentation/{name}')
-def _documentation_detail_page(name: str) -> Optional[RedirectResponse]:
-    if name in documentation.registry:
-        documentation.render_page(documentation.registry[name])
-        return None
-    if name in documentation.redirects:
-        return RedirectResponse(documentation.redirects[name])
-    raise HTTPException(404, f'documentation for "{name}" could not be found')
-
-
-ui.run(title="Reusable U!")
 
 
 

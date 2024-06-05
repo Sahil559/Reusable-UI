@@ -149,7 +149,7 @@ def create() -> None:
 
 
     with ui.column().classes('w-full p-8 lg:p-16 bold-links arrow-links max-w-[1600px] mx-auto')\
-            .style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1768AC; color: #ffffff;'):
+            .style('background: linear-gradient(to right, #3D52A0, #244855, #2C2E3A, #244855 ); color: #ffffff;'):
      link_target('features', '-50px')
      heading('Features')
      with ui.row().classes('w-full text-lg leading-tight grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8'):
