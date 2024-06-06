@@ -6,6 +6,7 @@ from . import documentation
 from webapp.footer import add_footer
 
 
+
 def create() -> None:
     """Create the content of the main page."""
     ui.context.client.content.classes('p-0 gap-0')
@@ -41,7 +42,7 @@ def create() -> None:
     add_head_html()
     add_header()
     
-    with ui.row().classes("w-full h-[100vh]")\
+    with ui.row().classes("w-full h-[90vh]")\
     .style('background: linear-gradient(to right, #3D52A0, #244855, #2C2E3A, #244855 ); color: #ffffff;'):
       with ui.grid().style("display: grid; grid-template-columns: 2fr 1fr; width: 100%;"):
         with ui.column().classes(' gap-4 md:gap-8 pt-32').style('margin-left:50px;margin-top:5px') :
@@ -54,10 +55,10 @@ def create() -> None:
               ui.html("<h2 class='text-2xl text-white text-left pl-8 pt-2 pr-8'>Build beautiful UIs effortlessly with our intuitive GUI components.</h2>")
             with ui.row().style("display: flex; justify-content: center; width: 100%;  margin-top: -10px;"):  
               ui.html("<h2 class='text-2xl text-white text-left pl-2 pt-2 pr-0'>Jump right into building</h2>")
-              ui.button("Read Docs",icon='book' ,on_click=lambda e: ui.navigate.to(
+              ui.button("Read Docs",icon='book',color=None ,on_click=lambda e: ui.navigate.to(
                                            '/documentation'),
                                     ).classes(
-                                        "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 "
+                                        "bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 "
                                     ).style(
                     "font-size: 18px; padding: 10px 20px margin-left: 40px;"
                 )
@@ -65,7 +66,7 @@ def create() -> None:
               ui.markdown('''
                     #####Available on [GitHub](https://github.com/Sahil559/Reusable-UI)
                 ''')
-              
+
 
         with ui.column().classes("mt-[7%] ml-[15%]") as col2:
                 with ui.grid(columns=2).classes().style(" margin-top:40px"):
@@ -147,71 +148,147 @@ def create() -> None:
                                     )  
 
 
+# Feature Section
+    features_list = [
+    ('anchor', 'Modularity', 'Highlight the modularity of your UI components, emphasizing how they are designed to be independent and can be easily reused across different parts of your web application. Users can mix and match these components to create custom layouts and interfaces tailored to their needs.'),
+    ('brush', 'Customization', 'Discuss the flexibility of your UI components, showcasing how users can customize their appearance, behavior, and functionality according to specific project requirements. This could include options for styling, theming, and configuration settings.'),
+    ('insights', 'Accessibility', 'Emphasize the accessibility features built into your UI components, ensuring that they meet WCAG (Web Content Accessibility Guidelines) standards and are inclusive to all users, including those with disabilities. Highlight any features such as keyboard navigation support, screen reader compatibility, and semantic HTML structure.'),
+    ('swap_horiz', 'Responsive Design', 'Showcase how your UI components are designed to be responsive, meaning they adapt and display appropriately across various devices and screen sizes. Whether it\'s desktops, tablets, or smartphones, users can expect consistent and optimized experiences.'),
+    ('source', 'Cross-Browser Compatibility', 'Assure users that your UI components are tested and compatible with a wide range of web browsers, including popular ones such as Chrome, Firefox, Safari, and Edge. This ensures a consistent experience regardless of the browser used by the end-user.'),
+    ('space_dashboard', 'Documentation and Support', 'Highlight the availability of comprehensive documentation and support resources for your UI components. Provide links to guides, tutorials, API references, and community forums where users can find help, report issues, and collaborate with others using the components.')
+    ]
 
+
+    # JavaScript to enable carousel sliding
+    ui.run_javascript("""
+      const carousel = document.getElementById('carousel');
+      let scrollAmount = 0;
+      const scrollMax = carousel.scrollWidth - carousel.clientWidth;
+
+     function scrollLeft() {
+        scrollAmount -= carousel.clientWidth / 3;
+        if (scrollAmount < 0) scrollAmount = 0;
+        carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+     }
+
+     function scrollRight() {
+        scrollAmount += carousel.clientWidth / 3;
+        if (scrollAmount > scrollMax) scrollAmount = scrollMax;
+        carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+     }
+
+     document.getElementById('left-arrow').addEventListener('click', scrollLeft);
+     document.getElementById('right-arrow').addEventListener('click', scrollRight);
+    """)
+
+    ui.add_head_html('''
+    <style>
+        #carousel {
+            scroll-behavior: smooth;
+            display: flex;
+            align-items: center;
+        }
+        #carousel::-webkit-scrollbar {
+            display: none;
+        }
+        #carousel {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .carousel-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .feature-card {
+            height: 400px;
+            overflow: hidden;
+        }
+        .feature-card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        .feature-card .content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .feature-card .content .description {
+            overflow-y: auto;
+            max-height: 200px;
+        }
+    </style>
+''')
+
+    def create_feature_card(icon, title, description):
+     with ui.card().classes('feature-card flex-shrink-0 w-80 mx- rounded-lg shadow-lg bg-white text-black transition-transform duration-300 ease-in-out'):
+        with ui.column().classes('content p-4'):
+            ui.icon(icon).classes('text-5xl mb-4 text-blue-500')
+            ui.label(title).classes('text-2xl font-bold mb-2 text-gray-800')
+            ui.label(description).classes('description text-lg text-gray-600')
+
+    
+    # Create the carousel component
     with ui.column().classes('w-full p-8 lg:p-16 bold-links arrow-links max-w-[1600px] mx-auto')\
-            .style('background: linear-gradient(to right, #3D52A0, #244855, #2C2E3A, #244855 ); color: #ffffff;'):
+     .style('background: linear-gradient(to right, #3D52A0, #244855, #2C2E3A, #244855); color: #ffffff; position: relative;'):
      link_target('features', '-50px')
-     heading('Features')
-     with ui.row().classes('w-full text-lg leading-tight grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8'):
-        with ui.column():
-            features('anchor', 'Modularity', [
-                'Highlight the modularity of your UI components, emphasizing how they are designed to be independent and can be easily reused across different parts of your web application. Users can mix and match these components to create custom layouts and interfaces tailored to their needs.',
-            ])
-        with ui.column():
-            features('brush', 'Customization', [
-                'Discuss the flexibility of your UI components, showcasing how users can customize their appearance, behavior, and functionality according to specific project requirements. This could include options for styling, theming, and configuration settings.',
-            ])
-        with ui.column():
-            features('insights', 'Accessibility', [
-                'Emphasize the accessibility features built into your UI components, ensuring that they meet WCAG (Web Content Accessibility Guidelines) standards and are inclusive to all users, including those with disabilities. Highlight any features such as keyboard navigation support, screen reader compatibility, and semantic HTML structure.',
-            ])
-        with ui.column():
-            features('swap_horiz', 'Responsive Design', [
-                'Showcase how your UI components are designed to be responsive, meaning they adapt and display appropriately across various devices and screen sizes. Whether it\'s desktops, tablets, or smartphones, users can expect consistent and optimized experiences.',
-            ])
-        with ui.column():
-            features('source', 'Cross-Browser Compatibility', [
-                'Assure users that your UI components are tested and compatible with a wide range of web browsers, including popular ones such as Chrome, Firefox, Safari, and Edge. This ensures a consistent experience regardless of the browser used by the end-user.',
-            ])
-        with ui.column():
-            features('space_dashboard', 'Documentation and Support', [
-                'Highlight the availability of comprehensive documentation and support resources for your UI components. Provide links to guides, tutorials, API references, and community forums where users can find help, report issues, and collaborate with others using the components.',
-            ])
+     heading('Features').classes('text-center text-5xl mb-0 text-white').style('font-size: 3rem')
+     ui.label('Explore the key features of our application').style('font-size: 1.25rem')
+     ui.button('◀').classes('carousel-btn absolute left-2 top-1/2 transform -translate-y-1/2 z-10').props('id="left-arrow"')
+     ui.button('▶').classes('carousel-btn absolute right-2 top-1/2 transform -translate-y-1/2 z-10').props('id="right-arrow"')
+     with ui.row().classes('overflow-x-auto flex-nowrap w-full py-8 items-center justify-start space-x-12').props('id="carousel"'):
+        for icon, title, description in features_list:
+            create_feature_card(icon, title, description)
 
 
+
+# Demos Section
     with ui.column().classes('w-full p-8 lg:p-16 max-w-[1600px] mx-auto')\
             .style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #5579C6; color: #ffffff;'):
         link_target('demos', '-50px')
-        heading('Demos')
+        heading('Demos').style('font-size: 3rem')
         with ui.column().classes('w-full'):
             documentation.create_intro()
-        with ui.column().classes('gap-1 max-lg:items-center max-lg:text-center'):
-                ui.markdown('Browse through plenty of live demos.') \
-                    .classes('text-white text-2xl md:text-3xl font-medium')
-                ui.link('Documentation', '/documentation').style('color: black !important') \
-                .classes('rounded-full mx-auto px-12 py-2 bg-white font-medium text-lg md:text-xl')    
+        with ui.column().classes('gap-2 bold-links arrow-links text-lg mt-10').style("display: flex; justify-content: center; width: 100%;"):  
+              ui.markdown('###Browse through plenty of live [Demos](/documentation).')
+
+
+# About Section
+    with ui.row().classes('w-full p-8 lg:p-5 bold-links arrow-links max-w-[1600px] mx-auto')\
+        .style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1768AC; color: #ffffff;'):
+     link_target('about')
+     with ui.column().classes('''
+            max-w-[1500px] m-auto
+            py-20 px-8 lg:px-16
+            items-center justify-between flex-wrap flex-col md:flex-row gap-16
+        '''):
+        with ui.column().classes('gap-6 flex-1'):
+            heading('Why Reusable UI ?').classes('text-center text-5xl mb-8 text-white').style('font-size: 3rem')
+            with ui.column().classes('gap-4 text-xl text-white bold-links arrow-links'):
+                ui.markdown('''
+                    **"Reusable UI"** is a comprehensive project aimed at providing developers with a robust toolkit for creating elegant and consistent user interfaces effortlessly. Each component is thoughtfully designed to seamlessly integrate into any project, whether it be a simple webpage or a complex web application.
+                ''')
+                ui.markdown('''
+                    With **Reusable UI**, developers can streamline their workflow, reduce redundancy, and focus on what truly matters: delivering exceptional user experiences.
+                ''')
+                ui.markdown('''
+                    Experience the power of reusability with **Reusable UI**, and unlock a new era of web development possibilities.
+                ''')
+        ui.image(source="webapp/static/ux.png").style("width: 30%; height: 60%;")
 
 
 
-    with ui.row().classes('w-full p-8 lg:p-16 bold-links arrow-links max-w-[1600px] mx-auto')\
-            .style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1768AC; color: #ffffff;'):
-        link_target('why')
-        with ui.column().classes('''
-                max-w-[1600px] m-auto
-                py-20 px-8 lg:px-16
-                items-center justify-center no-wrap flex-col md:flex-row gap-16
-            '''):
-            with ui.column().classes('gap-8'):
-                heading('Why Reusable UI?')
-                with ui.column().classes('gap-2 text-xl text-white bold-links arrow-links'):
-                    ui.markdown('''
-                        "Resuable UI" is a comprehensive project aimed at providing developers with a robust toolkit for creating elegant and consistent user interfaces effortlessly. 
-                                Each component is thoughtfully designed to seamlessly integrate into any project, whether it be a simple webpage or a complex web application. 
-                                With Resuable UI, developers can streamline their workflow, reduce redundancy, and focus on what truly matters: delivering exceptional user experiences.
-                    ''')
-                    ui.markdown('''
-                        Resuable UI is your go-to solution for building beautiful, cohesive interfaces with ease. 
-                                Experience the power of reusability with Resuable UI, and unlock a new era of web development possibilities.
-                    ''')
-
+# footer section
     add_footer()

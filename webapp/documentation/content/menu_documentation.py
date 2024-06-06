@@ -3,7 +3,9 @@ from nicegui import ui
 from . import doc
 
 
-@doc.demo(ui.menu)
+@doc.demo('Menu', '''
+    The menu should be placed inside the element where it should be shown.
+''')
 def main_demo() -> None:
     with ui.row().classes('w-full items-center'):
         result = ui.label().classes('mr-auto')
@@ -17,8 +19,8 @@ def main_demo() -> None:
                 ui.menu_item('Close', menu.close)
 
 
-@doc.demo('Client-side auto-close', '''
-    Use the `auto-close` prop to automatically close the menu on any click event directly without a server round-trip.
+@doc.demo('Client-side auto-close Menu', '''
+    Use the auto-close prop to automatically close the menu on any click event directly without a server round-trip.
 ''')
 def auto_close():
     with ui.button(icon='menu'):

@@ -3,8 +3,8 @@ from . import doc
 
 
 @doc.demo('Header', '''
-    Use the `auto-close` prop to automatically close the menu on any click event directly without a server round-trip.
-''')
+         This is an example of a header that can be use in webpage.
+    ''')
 def navbar() -> None:
     header = ui.header().classes(
         "flex justify-between items-center transparent no-shadow navbar"

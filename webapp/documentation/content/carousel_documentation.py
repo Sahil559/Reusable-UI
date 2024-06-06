@@ -4,8 +4,7 @@ from . import doc
 
 
 @doc.demo('Carosel', '''
-    You can remove the shadow from a card by adding the `no-shadow` class.
-    The following demo shows a 1 pixel wide border instead.
+    A demo page to show the use of carosel in a webpage.
 ''')
 def main_demo() -> None:
     with ui.carousel(animated=True, arrows=True, navigation=True).props('height=180px'):

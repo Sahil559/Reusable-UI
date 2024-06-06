@@ -1,0 +1,8 @@
+header:
+  classes: "items-center duration-200 p-0 px-6 no-wrap"
+  style: "box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1260CC; color: #ffffff"
+items:
+  Features: "/#features"
+  Demos: "/#demos"
+  About: "/#about"
+  Login: "/Login"

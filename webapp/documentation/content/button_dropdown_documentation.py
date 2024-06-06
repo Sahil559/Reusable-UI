@@ -5,7 +5,6 @@ from . import doc
 
 @doc.demo('Dropdown button', '''
     You can put any elements inside a dropdown button.
-    Here is a demo with a few switches.
 ''')
 def main_demo() -> None:
     with ui.dropdown_button('Open me!', auto_close=True):

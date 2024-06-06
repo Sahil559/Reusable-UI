@@ -3,7 +3,7 @@ from . import doc
 
 
 @doc.demo('About Page', '''
-    To use a photo as an avatar, you can use `ui.image` within `ui.avatar`.
+    A demo page to show the about section page for a webpage.
 ''')
 def content():
         ui.query("body").style("background-color: lightblue")

@@ -8,7 +8,7 @@ from .demo import demo
 
 def create_intro() -> None:
     @_main_page_demo('Page Section', '''
-    You can also add a radio.
+    A demo page to show the about section page for a webpage.
 ''')
     def content():
         ui.query("body").style("background-color: lightblue")
@@ -55,7 +55,7 @@ def create_intro() -> None:
         
 
     @_main_page_demo('Navigations', '''
-        Comes with a collection of commonly used UI elements.
+        This is an example of a header that can be use in webpage.
     ''')
     def navbar() -> None:
      header = ui.header().classes(
@@ -82,7 +82,7 @@ def create_intro() -> None:
 
 
     @_main_page_demo('Input Areas', '''
-        Time demo .
+        This demo shows how to implement a date picker with an input element.
     ''')
     def date():
      with ui.input('Date') as date:
@@ -93,8 +93,7 @@ def create_intro() -> None:
 
 
     @_main_page_demo('Elements', '''
-        You can put any elements inside a dropdown button.
-    Here is a demo with a few switches.
+        This shows a dropdown, you can put any elements inside a dropdown button.
     ''')
     def custom_dropdown_button() -> None:
      with ui.dropdown_button('Settings', icon='settings', split=True):

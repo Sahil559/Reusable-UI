@@ -3,7 +3,7 @@ from typing import Optional
 
 from nicegui import app, ui
 from webapp.search import Search
-import json
+import yaml
 import subprocess
 
 
@@ -13,19 +13,15 @@ STYLE_CSS = (Path(__file__).parent / 'static' / 'style.css').read_text()
 # Function to load menu items from JSON file
 def load_menu_items(file_path):
     with open(file_path, 'r') as f:
-        return json.load(f)
+        return yaml.safe_load(f)
     
-file_path = (Path(__file__).parent / 'menu.json')
+file_path = (Path(__file__).parent / 'menu.yaml')
 menu_data = load_menu_items(file_path)
 menu_items = menu_data.get('items', {})
 
 def add_head_html() -> None:
     """Add the code from header.html and reference style.css."""
     ui.add_head_html(HEADER_HTML + f'<style>{STYLE_CSS}</style>')
-
-def start_auth_server():
-    """Start the authentication server by running main2.py."""
-    subprocess.Popen(['python', 'main2.py'])
 
 
 def add_header(menu: Optional[ui.left_drawer] = None) -> None:
@@ -53,9 +49,10 @@ def add_header(menu: Optional[ui.left_drawer] = None) -> None:
             ui.label('Resuable U!').classes(replace='text-lg text-white')
 
         with ui.dropdown_button('Documentation', auto_close=True).props('flat round color=white').classes(header_properties.get('classes', 'text-lg text-white')):
-              ui.item('Elements', on_click=lambda: ui.navigate.to('/documentation/section_element')).classes('text-white bg-blue-900 hover:bg-blue-500')
+              
               ui.item('Page Layout', on_click=lambda: ui.navigate.to('/documentation/section_page_layout')).classes('text-white bg-blue-900 hover:bg-blue-500')
               ui.item('Navigations', on_click=lambda: ui.navigate.to('/documentation/section_navigations')).classes('text-white bg-blue-900 hover:bg-blue-500')
+              ui.item('Elements', on_click=lambda: ui.navigate.to('/documentation/section_element')).classes('text-white bg-blue-900 hover:bg-blue-500')
               ui.item('Input Area', on_click=lambda: ui.navigate.to('/documentation/section_input_area')).classes('text-white bg-blue-900 hover:bg-blue-500')
     
 

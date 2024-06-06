@@ -14,8 +14,7 @@ def create_card(icon, text):
 
 
 @doc.demo('Tech Stack Page', '''
-    You can put any elements inside a dropdown button.
-    Here is a demo with a few switches.
+    A demo page to show the use of cards for a tech stack page.
 ''')
 def main_demo() -> None:
     ui.page_title("Home")

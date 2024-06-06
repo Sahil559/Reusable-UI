@@ -2,13 +2,13 @@ from nicegui import ui, app
 from . import doc
 
 
-@doc.demo('Grid Recipie Page', '''
-    To use a photo as an avatar, you can use `ui.image` within `ui.avatar`.
+@doc.demo('Grid Recipe Page', '''
+    A demo page to show the use of grid for recipe page .
 ''')
 def content():
   ui.context.client.content.classes('p-0 gap-0')
   with ui.row().classes("w-full h-full").style('background: linear-gradient(to right, #244855, #2C2E3A);'):
-
+   
     recipes = [
         {
             "image": "https://source.unsplash.com/random/200x200?pizza",
@@ -54,7 +54,8 @@ def content():
         }
     ]
 
-    with ui.grid(columns=3).classes().style("margin: 40px; gap: 20px;"):
+    ui.markdown('''###Recipie Page''').classes("text-lg font-bold text-center").style("margin: 40px; margin-left: 460px; margin-bottom: 5px")
+    with ui.grid(columns=3).classes().style("margin: 40px; gap: 60px;"):
         for recipe in recipes:
             with ui.card().tight().classes("border rounded-lg shadow-md card-plus").style('background-color: #fff; color: #000;'):
                 ui.image(source=recipe["image"]).classes("w-full h-[150px] object-cover")

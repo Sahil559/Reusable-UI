@@ -3,8 +3,7 @@ from . import doc
 
 
 @doc.demo('Profile page', '''
-    You can put any elements inside a dropdown button.
-    Here is a demo with a few switches.
+    A demo page to show the profile page for a webpage using cards.
 ''')
 def main_demo() -> None:
     ui.page_title("Home")

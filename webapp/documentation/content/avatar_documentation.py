@@ -3,7 +3,7 @@ from nicegui import ui
 from . import doc
 
 
-@doc.demo('Avatar','''To use a photo as an avatar, you can use `ui.image` within `ui.avatar`
+@doc.demo('Avatar','''You can also add a avatar.
           ''')
 def main_demo() -> None:
     ui.avatar('favorite_border', text_color='grey-11')

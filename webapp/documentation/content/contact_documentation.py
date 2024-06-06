@@ -8,8 +8,7 @@ def on_click(button_submit):
     button_submit.text = "Clicked"
 
 @doc.demo('Contact Page', '''
-    You can put any elements inside a dropdown button.
-    Here is a demo with a few switches.
+    A demo page to show the contact or form section page for a webpage.
 ''')
 def main_demo() -> None:
         ui.page_title('Contact Me')   
