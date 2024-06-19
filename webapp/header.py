@@ -34,10 +34,8 @@ def add_header(menu: Optional[ui.left_drawer] = None) -> None:
         }});
     '''))
     header_properties = menu_data.get('header', {})
-    with ui.header() \
-            .classes(header_properties.get('classes', '')) \
-            .style(header_properties.get('style', '')):
-        
+    with ui.header().classes("header-container"):
+
         # ui.button(on_click=lambda: left_drawer.toggle(), icon='menu').props('flat color=white')
         # with ui.left_drawer(elevated=True, value=False).classes('bg-blue-100').style('box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1260CC;') as left_drawer:
         #  ui.label('')  
