@@ -84,7 +84,7 @@ msgpack==1.0.8
 multidict==6.0.5
 mypy-extensions==1.0.0
 nest-asyncio==1.6.0
-networkx==3.3
+networkx==3.2.1
 new-package==0.0.1
 nicegui==1.4.23
 nltk==3.8.1
