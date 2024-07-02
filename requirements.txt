@@ -29,7 +29,6 @@ Deprecated==1.2.14
 dirtyjson==1.0.8
 distlib==0.3.8
 distro==1.9.0
-Django==5.0.4
 dnspython==2.6.1
 docutils==0.19
 dulwich==0.21.7
