@@ -108,7 +108,7 @@ prometheus_client==0.20.0
 protobuf==4.25.3
 pscript==0.7.7
 psutil==5.9.8
-psycopg2==2.9.9
+psycopg2-binary==2.9.6
 ptyprocess==0.7.0
 pyarrow==16.0.0
 pyasn1==0.6.0
