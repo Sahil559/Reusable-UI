@@ -69,3 +69,5 @@ venv/
 .dataconnect
 
 .vercel
+
+webapp/auth/
